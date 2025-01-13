@@ -31,14 +31,20 @@ provider "aws" {
   region = "ap-northeast-1"
 }
 
+variable "instance_name" {
+  description = "Value of the Name tag for the EC2 instance"
+  type        = string
+  default     = "ExampleAppServerInstance"
+}
+
 resource "aws_instance" "app_server" {
-  ami                    = "ami-08f52b2e87cebadd9"
+  ami                    = "ami-08851e862b7a536d0"
   instance_type          = "t2.micro"
   vpc_security_group_ids = ["sg-08a1e8312e6b527d3"]
   subnet_id              = "subnet-091a32d12c159b50f"
 
   tags = {
-    Name = "ExampleAppServerInstance"
+    Name = var.instance_name
   }
 }
 
